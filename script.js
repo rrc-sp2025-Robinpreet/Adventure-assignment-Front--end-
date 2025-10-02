@@ -14,9 +14,9 @@ const questionElement = document.getElementById("question");
 const answersElement = document.getElementById("answers");
 const nextButton = document.getElementById("next-button");
 
-// ==========================
+// --------------------
 // Story Data
-// ==========================
+// --------------------
 
 
 
@@ -59,6 +59,43 @@ const story = {
     choices: []
   }
 };
+
+
+// -------------------
+// Functions
+// -------------------
+
+
+
+// Renders the current story state
+function renderQuestion() {
+  const state = story[currentState];
+  questionElement.textContent = state.text;
+
+  // Clear old choices
+  answersElement.innerHTML = "";
+
+  // Add new choices
+  state.choices.forEach(choice => {
+    addAnswerButton(choice.text, choice.nextState);
+  });
+
+  // Show next (restart) button only if at an ending
+  nextBtn.style.display = state.choices.length === 0 ? "block" : "none";
+}
+
+// Creates and appends a choice button
+function addAnswerButton(text, nextState) {
+  const li = document.createElement("li");
+  const button = document.createElement("button");
+  button.textContent = text;
+  button.addEventListener("click", () => {
+    currentState = nextState;
+    renderQuestion();
+  });
+  li.appendChild(button);
+  answersElement.appendChild(li);
+}
 
 
 
