@@ -80,11 +80,11 @@ function renderQuestion() {
     addAnswerButton(choice.text, choice.nextState);
   });
 
-  // Show next (restart) button only if at an ending
+  // Show next (restart) button only if at an ending //
   nextBtn.style.display = state.choices.length === 0 ? "block" : "none";
 }
 
-// Creates and appends a choice button
+// Creates and appends a choice button //
 function addAnswerButton(text, nextState) {
   const li = document.createElement("li");
   const button = document.createElement("button");
@@ -96,6 +96,21 @@ function addAnswerButton(text, nextState) {
   li.appendChild(button);
   answersElement.appendChild(li);
 }
+
+
+//------------------ //
+// Event Listeners
+// ----------------- //
+nextBtn.addEventListener("click", () => {
+  currentState = "start"; // restart story
+  renderQuestion();
+});
+
+// ----------------- //
+// Game Start
+// ---------------- //
+renderQuestion();
+
 
 
 
